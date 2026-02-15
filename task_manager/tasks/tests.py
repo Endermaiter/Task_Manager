@@ -3,12 +3,14 @@ from .models import Family, Task
 from datetime import date, timedelta
 
 class FamilyAndTaskTest(TestCase):
-
-    def create_family(self):
+    
+    def setUp(self):
         self.family = Family.objects.create(name="Family_Test")
+
+    def test_family_is_created(self):
         self.assertEqual(self.family.name, "Family_Test")
 
-    def create_task(self):
+    def test_create_task(self):
         task = Task.objects.create(
             title="Task_Test",
             description="Description_Test",
