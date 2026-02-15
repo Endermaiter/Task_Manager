@@ -22,3 +22,16 @@ class FamilyAndTaskTest(TestCase):
         self.assertEqual(task.title, "Task_Test")
         self.assertEqual(task.family, self.family)
         self.assertEqual(task.state, "to do")
+        
+    def test_create_task_1(self):
+        task = Task.objects.create(
+            title="aa",
+            description="aa",
+            state="to do",
+            expiration_date=date.today() + timedelta(days=7),
+            family=self.family
+        )
+
+        self.assertEqual(task.title, "aa")
+        self.assertEqual(task.family, self.family)
+        self.assertEqual(task.state, "to do")
