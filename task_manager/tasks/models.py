@@ -4,6 +4,10 @@ from django.db import models
 
 class Family(models.Model):
     name = models.CharField(max_length=100)
+    
+    class Meta:
+        verbose_name = "Family"
+        verbose_name_plural = "Families"
 
     def __str__(self):
         return self.name

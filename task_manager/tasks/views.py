@@ -16,5 +16,5 @@ class TareaViewSet(viewsets.ModelViewSet):
 
 
 class FamiliaViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all()
+    queryset = Family.objects.all()
     serializer_class = FamiliaSerializer
