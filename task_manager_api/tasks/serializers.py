@@ -4,7 +4,7 @@ from .models import Family, Task
 class FamiliaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Family
-        fields = '__all__'
+        fields = ['id', 'name']
         
 class TareaSerializer(serializers.ModelSerializer):
     
