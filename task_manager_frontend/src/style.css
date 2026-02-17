@@ -1,79 +1,213 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --primary: #10141e;
+  --accent: #facc15;
+  --text: #ffffff;
+  --gray: #9ca3af;
+  --bg-card: #1f2937;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+/* ===== NAVBAR ===== */
 
-body {
-  margin: 0;
+.app-navbar {
+  background: #0f172a;
+  padding: 1rem 2rem;
+  border-bottom: 2px solid var(--gray);
+
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  gap: 2rem;
+  align-items: center;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Links */
+
+.app-navbar a {
+  text-decoration: none;
+  color: var(--gray);
+  font-weight: 600;
+  font-family: "Baron", sans-serif;
+  letter-spacing: 1px;
+
+  position: relative;
+  transition: 0.3s ease;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* Hover effect */
+
+.app-navbar a:hover {
+  color: var(--accent);
 }
 
-.card {
-  padding: 2em;
+/* Active route */
+
+.app-navbar a.router-link-active {
+  color: var(--accent);
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
+/* Animated underline */
+
+.app-navbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  transition: 0.3s ease;
+}
+
+.app-navbar a:hover::after {
+  width: 100%;
+}
+
+.app-navbar a.router-link-active::after {
+  width: 100%;
+}
+
+.tasks-container {
+  max-width: 1100px;
+  margin: auto;
   padding: 2rem;
-  text-align: center;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.tasks-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.tasks-container h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* CREATE */
+
+.task-create {
+  background: var(--bg-card);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid var(--gray);
+  margin-bottom: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.task-create input,
+.task-create textarea,
+.task-create select {
+  background: #111827;
+  border: 1px solid var(--gray);
+  color: white;
+  padding: 0.6rem;
+  border-radius: 8px;
+}
+
+.task-create button {
+  background: var(--accent);
+  border: none;
+  padding: 0.6rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* GRID */
+
+.tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* CARD */
+
+.task-card {
+  background: var(--bg-card);
+  border: 3px solid var(--gray);
+  border-radius: 18px;
+  padding: 1.2rem;
+
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  transition: 0.2s;
+}
+
+.task-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.task-title input {
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  color: white;
+}
+
+/* META */
+
+.task-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.task-meta input,
+.task-meta select,
+.task-card textarea {
+  background: #111827;
+  border: 1px solid var(--gray);
+  color: white;
+  padding: 0.4rem;
+  border-radius: 8px;
+}
+
+/* ACTIONS */
+
+.task-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.btn-update {
+  flex: 1;
+  background: #22c55e;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-delete {
+  flex: 1;
+  background: #ef4444;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.family-card {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 120px;
+}
+
+.family-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: "Baron", sans-serif;
+  letter-spacing: 1px;
+  color: var(--text);
 }

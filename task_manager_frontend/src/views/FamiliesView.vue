@@ -1,9 +1,22 @@
 <template>
-  <div class="p-6">
-    <h1 class="text-2xl font-bold mb-4">Families</h1>
-    <ul class="list-disc pl-6">
-      <li v-for="family in families" :key="family.id">{{ family.name }}</li>
-    </ul>
+  <div class="tasks-container p-6">
+
+    <h1 class="text-2xl font-bold mb-6">Families</h1>
+
+    <section class="tasks-grid">
+
+      <div
+        v-for="family in families"
+        :key="family.id"
+        class="task-card family-card"
+      >
+        <h3 class="family-title">
+          {{ family.name }}
+        </h3>
+      </div>
+
+    </section>
+
   </div>
 </template>
 
@@ -19,10 +32,7 @@ export default {
       families.value = await getFamilies();
     };
 
-    onMounted(async () => {
-      families.value = await getFamilies();
-      console.log("Loaded families:", families.value);
-    });
+    onMounted(loadFamilies);
 
     return { families };
   },
