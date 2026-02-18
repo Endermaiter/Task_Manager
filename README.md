@@ -92,13 +92,13 @@ npm --version
 
 ## ⚙ Proyect Setup
 
-Clone the proyect, as usual:
+Clone the project, as usual:
 
 ``` bash
 git clone https://github.com/Endermaiter/Task_Manager.git
 ```
 
-This project includes an automatic setup script (setup.ps1). However Windows may block script execution by default. So, before running the script, ensure running scripts is disabled on your system by:
+This project includes an automatic setup script (setup.ps1). However, Windows may block script execution by default. So, before running the script, ensure running scripts is enabled on your system by:
 
 Run PowerShell **as Administrator** and execute:
 
@@ -108,7 +108,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 When prompted:
 
-`\[A\] Yes to All`
+`[A] Yes to All`
 
 
 
@@ -126,6 +126,8 @@ This script will:
 - Install frontend dependencies with NPM
 - Start Django service in a terminal
 - Start Vue service in other terminal
+
+> You can press `Ctrl+C` on each terminal to stop services.
 
 ## 🌐 Endpoints
 
