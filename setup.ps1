@@ -13,7 +13,7 @@ Write-Host "✅ Backend dependencies installed." -ForegroundColor Green
 poetry show --directory "$backendPath"
 
 Write-Host "🟢 Installing frontend dependencies..." -ForegroundColor Green
-npm install
+npm install --prefix "$frontendPath"
 Write-Host "✅ Frontend dependencies installed." -ForegroundColor Green
 
 Write-Host "🚀 Launching Django and Vue servers..." -ForegroundColor Cyan
