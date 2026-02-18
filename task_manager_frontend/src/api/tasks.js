@@ -18,7 +18,7 @@ export const createTask = async (task) => {
 };
 
 export const updateTask = async (taskId, task) => {
-  const response = await axios.put(`${API_URL}/tasks/${taskId}/`, task);
+  const response = await axios.patch(`${API_URL}/tasks/${taskId}/`, task);
   return response.data;
 };
 

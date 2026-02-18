@@ -1,7 +1,7 @@
 <template>
   <div class="tasks-container p-6">
 
-    <h1 class="text-2xl font-bold mb-6">Families</h1>
+    <h1>Families</h1>
 
     <section class="tasks-grid">
 

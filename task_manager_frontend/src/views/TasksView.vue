@@ -62,13 +62,95 @@
         </div>
 
         <div class="task-actions">
-          <button class="btn-update" @click="editTask(task)">UPDATE</button>
-          <button class="btn-delete" @click="removeTask(task.id)">DELETE</button>
+          <button class="btn-update" @click="updateTask(task)">UPDATE</button>
+          <button class="btn-delete" @click="deleteTask(task.id)">DELETE</button>
         </div>
 
       </div>
+
+      <div v-if="tasks.length === 0">No tasks found</div>
 
     </section>
 
   </div>
 </template>
+
+<script>
+import { ref, onMounted } from "vue";
+import { 
+  getFamilies, 
+  getTasks, 
+  createTask, 
+  updateTask as apiUpdateTask, 
+  deleteTask as apiDeleteTask 
+} from "../api/tasks";
+
+export default {
+  setup() {
+    const families = ref([]);
+    const tasks = ref([]);
+    const newTask = ref({
+      title: "",
+      description: "",
+      family: "",
+      state: "",
+      expiration_date: "",
+    });
+
+    const states = {
+      "to do": "TO DO",
+      "in progress": "IN PROGRESS",
+      done: "DONE",
+    };
+
+    const loadFamilies = async () => {
+      const data = await getFamilies();
+      families.value = Array.isArray(data) ? data : [];
+    };
+
+    const loadTasks = async () => {
+      const data = await getTasks();
+      tasks.value = Array.isArray(data) ? data : [];
+    };
+
+    onMounted(() => {
+      loadFamilies();
+      loadTasks();
+    });
+
+    const addTask = async () => {
+      if (!newTask.value.title || !newTask.value.family) {
+        alert("Title and Family are required!");
+        return;
+      }
+      const created = await createTask(newTask.value);
+      if (created) {
+        tasks.value.push(created);
+        newTask.value = { title: "", description: "", family: "", state: "", expiration_date: "" };
+      }
+    };
+
+  const updateTask = async (task) => {
+    const updated = await apiUpdateTask(task.id, task);
+    if (updated) {
+      const index = tasks.value.findIndex(t => t.id === task.id);
+      if (index !== -1) tasks.value[index] = updated;
+    }
+    alert("Task updated!")
+  };
+  
+  const deleteTask = async (id) => {
+    
+    const task = tasks.value.find(t => t.id === id);
+    const confirmed = confirm(`Are you sure to delete ${task.title}?`);
+    if (!confirmed) return;
+
+    await apiDeleteTask(id);
+
+    tasks.value = tasks.value.filter(t => t.id !== id);
+  };
+
+    return { families, tasks, newTask, states, addTask, updateTask, deleteTask };
+  },
+};
+</script>
